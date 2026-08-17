@@ -33,6 +33,7 @@ Publikuj je až spolu s nasazením appky – od té chvíle zapisuje do sdílen�
 zkopíruj hodnoty `firebaseConfig`.
 
 - **Lokálně:** zkopíruj [.env.example](.env.example) do `.env.local` a doplň `VITE_FIREBASE_*`.
+  Při přechodu na jiný projekt hodnoty přepiš – jinak vývoj běží dál proti tomu starému.
 - **Deploy (GitHub Pages):** v repu **Settings → Secrets and variables → Actions** přidej
   stejné klíče jako *secrets* (`VITE_FIREBASE_API_KEY`, …). Build workflow je injektuje do buildu.
 

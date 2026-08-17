@@ -3,7 +3,7 @@
 //
 // Zvedni VERSION, kdykoli se změní obsah tohohle souboru nebo seznam SHELL – stará cache
 // se pak při aktivaci smaže. Běžný build to nepotřebuje: soubory z Vite mají v názvu hash.
-const VERSION = "v3";
+const VERSION = "v4";
 const CACHE = `spatnyMinton-${VERSION}`;
 
 // Kostra appky, tedy to, co má stálou adresu. Hashované JS/CSS předem neznáme,
