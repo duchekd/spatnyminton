@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>Badminton</title>
+
+  <!-- pera vějířem od korku doprava nahoru -->
+  <g>
+    <g fill="#26aeef">
+      <path d="M 182.1,367.5 L 429.6,340.5 L 401.6,236.2 L 173.9,336.5 Z" />
+      <circle cx="415.6" cy="288.3" r="54" />
+    </g>
+    <g fill="#5fbcf2">
+      <path d="M 186.2,365.7 L 416.7,271.6 L 361.1,179 L 169.8,338.3 Z" />
+      <circle cx="388.9" cy="225.3" r="54" />
+    </g>
+    <g fill="#93d1f6">
+      <path d="M 189.7,362.9 L 385.3,208.9 L 306.3,135.3 L 166.3,341.1 Z" />
+      <circle cx="345.8" cy="172.1" r="54" />
+    </g>
+    <g fill="#bde2f9">
+      <path d="M 192.3,359.3 L 337.8,157.3 L 241.6,108.3 L 163.7,344.7 Z" />
+      <circle cx="289.7" cy="132.8" r="54" />
+    </g>
+    <g fill="#e2f2fc">
+      <path d="M 193.7,355.1 L 277.9,120.8 L 171.9,100.2 L 162.3,348.9 Z" />
+      <circle cx="224.9" cy="110.5" r="54" />
+    </g>
+  </g>
+
+  <!-- korek a objímka: vlastní soustava otočená po ose košíčku -->
+  <g transform="translate(171 360) rotate(133)">
+    <clipPath id="cork">
+      <rect x="6" y="-58" width="168" height="116" rx="58" />
+    </clipPath>
+
+    <rect x="-30" y="-48" width="44" height="96" rx="10" fill="#8aa0ae" />
+    <rect x="-8" y="-48" width="22" height="96" fill="#5c7382" />
+
+    <g clip-path="url(#cork)">
+      <rect x="6" y="-58" width="168" height="116" fill="#ffa21a" />
+      <rect x="6" y="0" width="168" height="58" fill="#f96e00" />
+    </g>
+  </g>
+</svg>

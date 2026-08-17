@@ -1,0 +1,53 @@
+rules_version = '2';
+
+// Pravidla pro sdílený badmintonový dataset.
+// Nasaď přes Firebase konzoli (Firestore Database → Rules) nebo Firebase CLI.
+//
+// Seznam party ZÁMĚRNĚ není tady, ale v dokumentu config/members – repo je veřejné
+// a e-maily do něj nepatří. Přidání dalšího člověka je pak úprava jednoho pole
+// v konzoli, bez zásahu do kódu a bez redeploye pravidel.
+//
+// POZOR: dokument config/members musí existovat dřív, než tahle pravidla nasadíš.
+// Bez něj výraz níže spadne a Firestore odepře přístup úplně všem.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function party() {
+      return get(/databases/$(database)/documents/config/members).data;
+    }
+
+    function email() {
+      return request.auth.token.email.lower();
+    }
+
+    // Správce – jediný, kdo smí měnit schválená data.
+    function isAdmin() {
+      return request.auth != null && email() in party().admins;
+    }
+
+    // Člen party – smí číst data a posílat návrhy na doplnění.
+    function isMember() {
+      return isAdmin() || (request.auth != null && email() in party().members);
+    }
+
+    // Seznam party. Čte ho appka (podle něj ukazuje sekci schvalování) i pravidla výše.
+    // Měnit se dá jedině z Firebase konzole, ta pravidla obchází.
+    match /config/members {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // Schválená data – čtou všichni z party, zapisuje jedině správce.
+    match /badminton/{docId} {
+      allow read: if isMember();
+      allow write: if isAdmin();
+    }
+
+    // Návrhy čekající na schválení – jeden dokument na uživatele, klíčem je jeho uid.
+    // Do svého dokumentu smí každý člen party zapisovat i ho smazat (vzít návrh zpět),
+    // do cizích nevidí. Správce vidí a maže všechny (schválení / zamítnutí).
+    match /badminton_proposals/{uid} {
+      allow read, write: if isAdmin() || (isMember() && request.auth.uid == uid);
+    }
+  }
+}
