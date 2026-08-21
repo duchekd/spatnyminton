@@ -32,7 +32,7 @@ const SummarySection = ({ summary }: Props) => {
   const avgSetScore =
     summary.avgSets === 0
       ? "—"
-      : `${formatDecimal(summary.avgWinnerPoints, culture, 1)} : ${formatDecimal(summary.avgLoserPoints, culture, 1)}`;
+      : `${formatDecimal(summary.avgWinnerPoints, culture)} : ${formatDecimal(summary.avgLoserPoints, culture)}`;
   const avgSetTooltip = `${texts.sumAvgSetScoreHint} (${summary.avgSets}/${summary.sets})`;
 
   return (
